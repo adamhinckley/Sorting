@@ -1,5 +1,5 @@
 # Complete the selection_sort() function below in class with your instructor
-def selection_sort(arr):
+def selection_sort(arr): 
     # loop through n-1 elements
     for i in range(0, len(arr) - 1):
         cur_index = i
@@ -63,11 +63,12 @@ def count_sort(arr):
 
     # creates an array of zeros that matches the length of the passed in array
     n = [0 for i in range(m + 1)]
+
     sorted_arr = []
     for i in arr:
-        print(i)
         n[i] += 1
     for i in range(len(n)):
+        print(i)
         if n[i] != 0:
             sorted_arr += [i for n in range(n[i])]
 
@@ -77,4 +78,4 @@ def count_sort(arr):
 arr1 = [1, 5, 8, 4, 2, 9, 6, 0, 3, 7]
 arr2 = []
 arr3 = [1, 5, -2, 4, 3]
-print(count_sort(arr3))
+print(count_sort(arr1))
