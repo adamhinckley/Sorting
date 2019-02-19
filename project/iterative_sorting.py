@@ -1,5 +1,5 @@
 # Complete the selection_sort() function below in class with your instructor
-def selection_sort(arr): 
+def selection_sort(arr):
     # loop through n-1 elements
     for i in range(0, len(arr) - 1):
         cur_index = i
@@ -22,13 +22,13 @@ arr = [1, 5, 8, 4, 2, 9, 6, 0, 3, 7]
 
 def insertion_sort(arr):
     for i in range(1, len(arr)):
-        key = arr[i]
+        temp = arr[i]
         j = i - 1
-        while j >= 0 and key < arr[j]:
+        while j >= 0 and temp < arr[j]:
             arr[j+1] = arr[j]
             j -= 1
 
-        arr[j+1] = key
+        arr[j+1] = temp
 
     return arr
 

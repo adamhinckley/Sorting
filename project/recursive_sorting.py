@@ -90,12 +90,78 @@ def quick_sort(arr, low, high):
     return arr
 
 
-print(quick_sort(arr, 0, len(arr) - 1))
+# print(quick_sort(arr, 0, len(arr) - 1))
 
 # STRETCH: implement the Timsort function below
 # hint: check out https://github.com/python/cpython/blob/master/Objects/listsort.txt
 
 
-def timsort(arr):
+# merge function merges the sorted runs
+
+RUN = 32
+
+
+def insertionSort(arr, left, right):
+
+    for i in range(left + 1, right+1):
+
+        temp = arr[i]
+        j = i - 1
+        while arr[j] > temp and j >= left:
+
+            arr[j+1] = arr[j]
+            j -= 1
+
+        arr[j+1] = temp
+
+# merge function merges the sorted runs
+
+
+def timsort(arr, n):
+ # Sort individual subarrays of size RUN
+    for i in range(0, n, RUN):
+        insertionSort(arr, i, min((i+31), (n-1)))
+
+    # start merging from size RUN (or 32). It will merge
+    # to form size 64, then 128, 256 and so on ....
+    size = RUN
+    while size < n:
+
+        # pick starting point of left sub array. We
+        # are going to merge arr[left..left+size-1]
+        # and arr[left+size, left+2*size-1]
+        # After every merge, we increase left by 2*size
+        for left in range(0, n, 2*size):
+
+            # find ending point of left sub array
+            # mid+1 is starting point of right sub array
+            mid = left + size - 1
+            right = min((left + 2*size - 1), (n-1))
+
+            # merge sub array arr[left.....mid] &
+            # arr[mid+1....right]
+            tim_merge(arr, left, mid, right)
+
+        size = 2*size
 
     return arr
+
+
+def printArray(arr, n):
+
+    for i in range(0, n):
+        print(arr[i], end=" ")
+    print()
+
+
+# Driver program to test above function
+if __name__ == "__main__":
+
+    n = len(arr)
+    print("Given Array is")
+    printArray(arr, n)
+
+    timsort(arr, n)
+
+    print("After Sorting Array is")
+    printArray(arr, n)
